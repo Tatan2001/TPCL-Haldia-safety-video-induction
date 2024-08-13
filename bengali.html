@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safety Induction English Version</title>
+    <link rel="stylesheet" href="bengali.css">
+</head>
+
+<body>
+    <video id="videoElement" controls>
+        <source src="vid/safety video bengali.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    
+    <div class="footer">
+        <button id="homeButton" disabled><a href="index.html">Home Page</a></button>
+        <button id="bengaliButton" disabled><a href="english.html">Switch To English Version</a></button>
+        <button id="formButton" disabled>Fill your details</button>
+    </div>
+
+</body>
+
+<script>
+    var video = document.getElementById('videoElement');
+    var formButton = document.getElementById('formButton');
+    var lastTime = 0;
+
+    // Prevent fast-forwarding
+    video.addEventListener('timeupdate', function() {
+        if (video.currentTime > lastTime + 2) {
+            video.currentTime = lastTime;
+        }
+        lastTime = video.currentTime;
+    });
+
+    // Enable buttons when the video ends
+    video.addEventListener('ended', enableButtons);
+
+    function enableButtons() {
+        document.getElementById("homeButton").disabled = false;
+        document.getElementById("bengaliButton").disabled = false;
+        
+        // Enable the form button and attach the link
+        formButton.disabled = false;
+        formButton.innerHTML = '<a href="form.html">Fill your details</a>';
+    }
+
+    // Ensure the form button does nothing if the video hasn't ended
+    formButton.addEventListener('click', function(event) {
+        if (formButton.disabled) {
+            event.preventDefault();
+            alert("You must watch the entire video before filling out the form.");
+        }
+    });
+</script>
+
+</html>

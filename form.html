@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Details</title>
+    <link rel="stylesheet" href="form.css">
+</head>
+
+<body>
+    <div class="container">
+        <h2>Please Fill Your Details Here</h2>
+        <form id="userForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="vendorName">Vendor Name:</label>
+            <input type="text" id="vendorName" name="vendorName" required>
+
+            <label for="contactNumber">Contact Number:</label>
+            <input type="text" id="contactNumber" name="contactNumber" required>
+
+            <label for="meetPerson">Whom you want to meet:</label>
+            <input type="text" id="meetPerson" name="meetPerson" required>
+
+            <button type="button" onclick="validateForm()">Print</button>
+        </form>
+    </div>
+</body>
+<script>
+    function validateForm() {
+        const form = document.getElementById('userForm');
+        const inputs = form.querySelectorAll('input[required]');
+
+        let allFilled = true;
+        inputs.forEach(input => {
+            if (!input.value) {
+                allFilled = false;
+            }
+        });
+
+        if (allFilled) {
+            printToPDF();
+        } else {
+            alert('Please fill all the required fields.');
+        }
+    }
+
+    function printToPDF() {
+        window.print();
+    }
+</script>
+</html>
